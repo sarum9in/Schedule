@@ -16,11 +16,14 @@ Subject::Subject(const Subject &subj):
 
 Subject &Subject::operator=(const Subject &subj)
 {
-    m_name = subj.m_name;
-    m_hourCount = subj.m_hourCount;
-    m_firstClass = subj.m_firstClass;
-    if (subj.m_dates)
-        m_dates.reset(new DateList(*subj.m_dates.data()));
+    if (&subj!=this)
+    {
+        m_name = subj.m_name;
+        m_hourCount = subj.m_hourCount;
+        m_firstClass = subj.m_firstClass;
+        if (subj.m_dates)
+            m_dates.reset(new DateList(*subj.m_dates.data()));
+    }
     return *this;
 }
 
@@ -45,7 +48,10 @@ void Subject::setHourCount(const int hourCount_)
     if (!m_dates.isNull())
     {
         while (2*m_dates->size()<m_hourCount)
-            m_dates->push_back(m_dates->back().addDays(7));
+            if (m_dates->isEmpty())
+                m_dates->push_back(m_firstClass);
+            else
+                m_dates->push_back(m_dates->back().addDays(7));
         while (2*m_dates->size()>m_hourCount)
             m_dates->pop_back();
     }
