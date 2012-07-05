@@ -39,6 +39,7 @@ void EditGroup::accept()
 void EditGroup::addStudent()
 {
     m_studentsModel->insertRow(m_studentsModel->rowCount());
+    m_studentsModel->setData(m_studentsModel->index(m_studentsModel->rowCount()-1), trUtf8("Новый студент"));
 }
 
 void EditGroup::removeStudent()
