@@ -14,10 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         MainWindow.cpp \
-    EditGroup.cpp
+    EditGroup.cpp \
+    SubjectListEdit.cpp
 
 HEADERS  += MainWindow.hpp \
-    EditGroup.hpp
+    EditGroup.hpp \
+    SubjectListEdit.hpp
 
 FORMS    += MainWindow.ui \
-    EditGroup.ui
+    EditGroup.ui \
+    SubjectListEdit.ui
