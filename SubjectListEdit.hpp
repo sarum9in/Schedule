@@ -23,6 +23,9 @@ private slots:
     void accept();
     void goBack();
     void addSubject();
+    void subjectClicked(const QModelIndex &index);
+    void subjectClicked(const QString &subject);
+    void showSubjectList();
 
 signals:
     void back();

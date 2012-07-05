@@ -13,43 +13,69 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Список предметов:</string>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
+     <widget class="QWidget" name="subjectListPage">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="courseAndGroup">
+         <property name="text">
+          <string>Course and group</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Список предметов:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QListView" name="studentList"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QListView" name="subjectList"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="backButton">
+         <property name="text">
+          <string>Назад</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="addSubjectButton">
+         <property name="text">
+          <string>Добавить предмет</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="editSubjectPage">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="EditSubject" name="editSubject" native="true"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="courseAndGroup">
-     <property name="text">
-      <string>Course and group</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QPushButton" name="addSubjectButton">
-     <property name="text">
-      <string>Добавить предмет</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QPushButton" name="backButton">
-     <property name="text">
-      <string>Назад</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QListView" name="studentList"/>
-   </item>
-   <item row="1" column="1">
-    <widget class="QListView" name="subjectList"/>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>EditSubject</class>
+   <extends>QWidget</extends>
+   <header>EditSubject.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -84,9 +110,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>subjectList</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>SubjectListEdit</receiver>
+   <slot>subjectClicked(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>296</x>
+     <y>144</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>goBack()</slot>
   <slot>addSubject()</slot>
+  <slot>subjectClicked(QModelIndex)</slot>
+  <slot>showSubjectList()</slot>
  </slots>
 </ui>

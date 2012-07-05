@@ -13,6 +13,7 @@ SubjectListEdit::SubjectListEdit(QWidget *parent) :
     ui->subjectList->setModel(m_subjectsModel);
     connect(m_studentsModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(accept()));
     connect(m_subjectsModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(accept()));
+    connect(ui->editSubject, SIGNAL(back()), this, SLOT(showSubjectList()));
 }
 
 void SubjectListEdit::accept()
@@ -29,6 +30,24 @@ void SubjectListEdit::goBack()
 void SubjectListEdit::addSubject()
 {
     m_subjectsModel->insertRow(m_subjectsModel->rowCount());
+    m_subjectsModel->setData(m_subjectsModel->index(m_subjectsModel->rowCount()-1), trUtf8("Новый предмет"));
+}
+
+void SubjectListEdit::subjectClicked(const QModelIndex &index)
+{
+    subjectClicked(index.data().toString());
+}
+
+void SubjectListEdit::subjectClicked(const QString &subject)
+{
+    Subject &subj = m_group->subject(subject);
+    ui->editSubject->setSubject(subj);
+    ui->stackedWidget->setCurrentWidget(ui->editSubjectPage);
+}
+
+void SubjectListEdit::showSubjectList()
+{
+    ui->stackedWidget->setCurrentWidget(ui->subjectListPage);
 }
 
 void SubjectListEdit::setGroup(Group &group_)
