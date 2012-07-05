@@ -15,13 +15,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
-     <widget class="QPushButton" name="addgroupButton">
-      <property name="text">
-       <string>Добавить группу</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
@@ -29,8 +22,66 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="addgroupButton">
+      <property name="text">
+       <string>Добавить группу</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0" colspan="2">
-     <widget class="QTableView" name="tableView"/>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="1" column="0">
+       <widget class="QListView" name="course1List"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QListView" name="course2List"/>
+      </item>
+      <item row="1" column="4">
+       <widget class="QListView" name="course5List"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="QListView" name="course3List"/>
+      </item>
+      <item row="1" column="3">
+       <widget class="QListView" name="course4List"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>1 курс</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>2 курс</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>3 курс</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>4 курс</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>5 курс</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
