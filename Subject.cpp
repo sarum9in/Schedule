@@ -1,7 +1,7 @@
 #include "Subject.hpp"
 
 Subject::Subject():
-    m_hourCount(0)
+    m_hourCount(2)
 {
 }
 
