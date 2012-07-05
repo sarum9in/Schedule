@@ -24,6 +24,7 @@ public:
     const DateList *dates() const;
     void setDates(const DateList &dates_);
     void clearDates();
+    DateList audoDates() const;
 
 private:
     QString m_name;

@@ -42,6 +42,13 @@ int Subject::hourCount() const
 void Subject::setHourCount(const int hourCount_)
 {
     m_hourCount = hourCount_;
+    if (!m_dates.isNull())
+    {
+        while (2*m_dates->size()<m_hourCount)
+            m_dates->push_back(QDate());
+        while (2*m_dates->size()>m_hourCount)
+            m_dates->pop_back();
+    }
 }
 
 const QDate &Subject::firstClass() const
@@ -67,4 +74,15 @@ void Subject::setDates(const DateList &dates_)
 void Subject::clearDates()
 {
     m_dates.reset();
+}
+
+DateList Subject::audoDates() const
+{
+    DateList lst;
+    lst.append(m_firstClass);
+    for (int i = 0; 2*i<m_hourCount; ++i)
+    {
+        lst.append(lst.back().addDays(7));
+    }
+    return lst;
 }
