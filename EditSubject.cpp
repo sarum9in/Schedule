@@ -13,6 +13,11 @@ EditSubject::EditSubject(QWidget *parent) :
     connect(ui->audoDates, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
+Subject *EditSubject::subject()
+{
+    return m_subject;
+}
+
 void EditSubject::setSubject(Subject &subject_)
 {
     m_subject = &subject_;
@@ -45,6 +50,7 @@ void EditSubject::accept()
 
 void EditSubject::goBack()
 {
+    accept();
     emit back();
 }
 

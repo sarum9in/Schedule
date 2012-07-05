@@ -31,6 +31,9 @@ void SubjectListEdit::addSubject()
 {
     m_subjectsModel->insertRow(m_subjectsModel->rowCount());
     m_subjectsModel->setData(m_subjectsModel->index(m_subjectsModel->rowCount()-1), trUtf8("Новый предмет"));
+    m_group->setSubjectNames(m_subjectsModel->stringList());
+    ui->editSubject->setSubject(m_group->subject(m_group->subjectNames().back()));
+    ui->stackedWidget->setCurrentWidget(ui->editSubjectPage);
 }
 
 void SubjectListEdit::subjectClicked(const QModelIndex &index)
@@ -41,13 +44,19 @@ void SubjectListEdit::subjectClicked(const QModelIndex &index)
 void SubjectListEdit::subjectClicked(const QString &subject)
 {
     Subject &subj = m_group->subject(subject);
-    ui->editSubject->setSubject(subj);
-    ui->stackedWidget->setCurrentWidget(ui->editSubjectPage);
+    ui->stackedWidget->setCurrentWidget(ui->subjectSchedulePage);
 }
 
 void SubjectListEdit::showSubjectList()
 {
     ui->stackedWidget->setCurrentWidget(ui->subjectListPage);
+    QStringList lst = m_group->subjectNames();
+    Subject &subj = *ui->editSubject->subject();
+    lst.pop_back();
+    lst.push_back(subj.name());
+    m_group->setSubjectNames(lst);
+    m_group->subject(subj.name()) = subj;
+    m_subjectsModel->setStringList(m_group->subjectNames());
 }
 
 void SubjectListEdit::setGroup(Group &group_)

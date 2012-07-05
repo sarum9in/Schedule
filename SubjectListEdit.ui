@@ -64,6 +64,13 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="subjectSchedulePage">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="SubjectSchedule" name="subjectSchedule" native="true"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -73,6 +80,12 @@
    <class>EditSubject</class>
    <extends>QWidget</extends>
    <header>EditSubject.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SubjectSchedule</class>
+   <extends>QWidget</extends>
+   <header>SubjectSchedule.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

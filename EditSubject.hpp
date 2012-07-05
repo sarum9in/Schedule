@@ -16,6 +16,7 @@ class EditSubject : public QWidget
 
 public:
     explicit EditSubject(QWidget *parent = 0);
+    Subject *subject();
     void setSubject(Subject &subject_);
     ~EditSubject();
 
