@@ -14,6 +14,7 @@ SubjectListEdit::SubjectListEdit(QWidget *parent) :
     connect(m_studentsModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(accept()));
     connect(m_subjectsModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(accept()));
     connect(ui->editSubject, SIGNAL(back()), this, SLOT(showSubjectList()));
+    connect(ui->subjectSchedule, SIGNAL(back()), this, SLOT(showSubjectList()));
 }
 
 void SubjectListEdit::accept()
@@ -44,6 +45,7 @@ void SubjectListEdit::subjectClicked(const QModelIndex &index)
 void SubjectListEdit::subjectClicked(const QString &subject)
 {
     Subject &subj = m_group->subject(subject);
+    ui->subjectSchedule->setGroupSubject(*m_group, subj);
     ui->stackedWidget->setCurrentWidget(ui->subjectSchedulePage);
 }
 
