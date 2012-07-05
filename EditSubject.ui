@@ -39,10 +39,13 @@
      <item row="1" column="1">
       <widget class="QSpinBox" name="hourCount">
        <property name="minimum">
-        <number>1</number>
+        <number>2</number>
        </property>
        <property name="maximum">
-        <number>999</number>
+        <number>1000</number>
+       </property>
+       <property name="singleStep">
+        <number>2</number>
        </property>
       </widget>
      </item>
@@ -106,8 +109,42 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>audoDates</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>EditSubject</receiver>
+   <slot>setDatesState(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>421</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>282</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hourCount</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>EditSubject</receiver>
+   <slot>setHourCount(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>149</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>282</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>goBack()</slot>
+  <slot>setDatesState(int)</slot>
+  <slot>setHourCount(int)</slot>
  </slots>
 </ui>

@@ -3,9 +3,14 @@
 
 EditSubject::EditSubject(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::EditSubject)
+    ui(new Ui::EditSubject),
+    m_subjectDateModel(new SubjectDateModel(this))
 {
     ui->setupUi(this);
+    ui->classList->setModel(m_subjectDateModel);
+    connect(ui->subjectName, SIGNAL(textChanged(QString)), this, SLOT(accept()));
+    connect(ui->firstClassDate, SIGNAL(dateChanged(QDate)), this, SLOT(accept()));
+    connect(ui->audoDates, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
 void EditSubject::setSubject(Subject &subject_)
@@ -17,10 +22,12 @@ void EditSubject::setSubject(Subject &subject_)
     if (m_subject->dates())
     {
         ui->audoDates->setChecked(false);
-        // TODO m_subject.dates()
     }
     else
+    {
         ui->audoDates->setChecked(true);
+    }
+    updateDates();
 }
 
 void EditSubject::accept()
@@ -31,13 +38,43 @@ void EditSubject::accept()
     m_subject->clearDates();
     if (ui->audoDates->checkState()!=Qt::Checked)
     {
-        // TODO m_subject.setDates();
+        m_subject->setDates(m_subjectDateModel->dateList());
     }
+    updateDates();
 }
 
 void EditSubject::goBack()
 {
     emit back();
+}
+
+void EditSubject::setDatesState(int state)
+{
+    m_subjectDateModel->setEditable(state!=Qt::Checked);
+    accept();
+    updateDates();
+}
+
+void EditSubject::setHourCount(int count)
+{
+    m_subject->setHourCount(count);
+    accept();
+}
+
+void EditSubject::updateDates()
+{
+    if (ui->audoDates->checkState()!=Qt::Checked)
+    {
+        Q_ASSERT(m_subject->dates());
+        m_subjectDateModel->setEditable(true);
+        m_subjectDateModel->setDateList(*m_subject->dates());
+    }
+    else
+    {
+        Q_ASSERT(!m_subject->dates());
+        m_subjectDateModel->setEditable(false);
+        m_subjectDateModel->setDateList(m_subject->audoDates());
+    }
 }
 
 EditSubject::~EditSubject()

@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "Subject.hpp"
+#include "SubjectDateModel.hpp"
 
 namespace Ui {
 class EditSubject;
@@ -21,6 +22,9 @@ public:
 private slots:
     void accept();
     void goBack();
+    void setDatesState(int state);
+    void setHourCount(int count);
+    void updateDates();
 
 signals:
     void back();
@@ -28,6 +32,7 @@ signals:
 private:
     Ui::EditSubject *ui;
     Subject *m_subject;
+    SubjectDateModel *m_subjectDateModel;
 };
 
 #endif // EDITSUBJECT_HPP
