@@ -59,6 +59,12 @@
        <verstretch>1</verstretch>
       </sizepolicy>
      </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
     </widget>
    </item>
    <item row="1" column="0" rowspan="2">
@@ -147,5 +153,41 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addStudentButton</sender>
+   <signal>clicked()</signal>
+   <receiver>EditGroup</receiver>
+   <slot>addStudent()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>242</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>removeStudentButton</sender>
+   <signal>clicked()</signal>
+   <receiver>EditGroup</receiver>
+   <slot>removeStudent()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>343</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>addStudent()</slot>
+  <slot>removeStudent()</slot>
+ </slots>
 </ui>

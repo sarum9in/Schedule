@@ -19,6 +19,10 @@ public:
     virtual void accept();
     ~EditGroup();
 
+private slots:
+    void addStudent();
+    void removeStudent();
+
 private:
     Ui::EditGroup *ui;
     QStringListModel *m_studentsModel;

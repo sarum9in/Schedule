@@ -36,6 +36,19 @@ void EditGroup::accept()
     }
 }
 
+void EditGroup::addStudent()
+{
+    m_studentsModel->insertRow(m_studentsModel->rowCount());
+}
+
+void EditGroup::removeStudent()
+{
+    if (m_studentsModel->rowCount())
+    {
+        m_studentsModel->removeRow(m_studentsModel->rowCount()-1);
+    }
+}
+
 EditGroup::~EditGroup()
 {
     delete ui;
