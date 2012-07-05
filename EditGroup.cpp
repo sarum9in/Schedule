@@ -30,6 +30,8 @@ void EditGroup::accept()
     }
     else
     {
+        m_groupByName.remove(m_name);
+        m_groupByName[m_group.name()] = m_group;
         QDialog::accept();
     }
 }
