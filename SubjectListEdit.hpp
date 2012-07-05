@@ -30,6 +30,7 @@ private:
     Ui::SubjectListEdit *ui;
     Group *m_group;
     QStringListModel *m_studentsModel;
+    QStringListModel *m_subjectsModel;
 };
 
 #endif // SUBJECTLISTEDIT_HPP
