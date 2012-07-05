@@ -15,12 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         MainWindow.cpp \
     EditGroup.cpp \
-    SubjectListEdit.cpp
+    SubjectListEdit.cpp \
+    EditSubject.cpp
 
 HEADERS  += MainWindow.hpp \
     EditGroup.hpp \
-    SubjectListEdit.hpp
+    SubjectListEdit.hpp \
+    EditSubject.hpp
 
 FORMS    += MainWindow.ui \
     EditGroup.ui \
-    SubjectListEdit.ui
+    SubjectListEdit.ui \
+    EditSubject.ui
