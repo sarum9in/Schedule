@@ -4,6 +4,7 @@
 #include <QString>
 #include <QDate>
 #include <QList>
+#include <QMap>
 #include <QScopedPointer>
 
 typedef QList<QDate> DateList;
@@ -12,6 +13,8 @@ class Subject
 {
 public:
     Subject();
+    Subject(const Subject &subj);
+    Subject &operator=(const Subject &subj);
     const QString &name() const;
     void setName(const QString &name_);
     int hourCount() const;
@@ -28,5 +31,7 @@ private:
     QDate m_firstClass;
     QScopedPointer<DateList> m_dates;
 };
+
+typedef QMap<QString, Subject> SubjectByNameMap;
 
 #endif // SUBJECT_HPP

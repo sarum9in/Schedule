@@ -5,6 +5,25 @@ Subject::Subject():
 {
 }
 
+Subject::Subject(const Subject &subj):
+    m_name(subj.m_name),
+    m_hourCount(subj.m_hourCount),
+    m_firstClass(subj.m_firstClass)
+{
+    if (subj.m_dates)
+        m_dates.reset(new DateList(*subj.m_dates.data()));
+}
+
+Subject &Subject::operator=(const Subject &subj)
+{
+    m_name = subj.m_name;
+    m_hourCount = subj.m_hourCount;
+    m_firstClass = subj.m_firstClass;
+    if (subj.m_dates)
+        m_dates.reset(new DateList(*subj.m_dates.data()));
+    return *this;
+}
+
 const QString &Subject::name() const
 {
     return m_name;
