@@ -34,3 +34,18 @@ void Group::setMembers(const QStringList &members_)
 {
     m_members = members_;
 }
+
+const QStringList &Group::subjectNames() const
+{
+    return m_subjectNames;
+}
+
+void Group::setSubjectNames(const QStringList &subjectNames_)
+{
+    m_subjectNames = subjectNames_;
+}
+
+Subject &Group::subject(const QString &name)
+{
+    return m_subjectByName[name];
+}

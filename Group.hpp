@@ -6,6 +6,8 @@
 #include <QList>
 #include <QMap>
 
+#include "Subject.hpp"
+
 class Group
 {
 public:
@@ -16,11 +18,16 @@ public:
     void setCourse(const int course_);
     const QStringList &members() const;
     void setMembers(const QStringList &members_);
+    const QStringList &subjectNames() const;
+    void setSubjectNames(const QStringList &subjectNames_);
+    Subject &subject(const QString &name);
 
 private:
     QString m_name;
     int m_course;
     QStringList m_members;
+    QStringList m_subjectNames;
+    SubjectByNameMap m_subjectByName;
 };
 
 typedef QList<Group> GroupList;
