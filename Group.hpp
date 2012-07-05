@@ -3,6 +3,8 @@
 
 #include <QString>
 #include <QStringList>
+#include <QList>
+#include <QMap>
 
 class Group
 {
@@ -20,5 +22,8 @@ private:
     int m_course;
     QStringList m_members;
 };
+
+typedef QList<Group> GroupList;
+typedef QMap<QString, Group> GroupByNameMap;
 
 #endif // GROUP_HPP

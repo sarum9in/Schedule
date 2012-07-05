@@ -1,6 +1,7 @@
 #include "Group.hpp"
 
-Group::Group()
+Group::Group():
+    m_course(1)
 {
 }
 
