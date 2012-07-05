@@ -22,6 +22,7 @@ public:
 private slots:
     void accept();
     void goBack();
+    void addSubject();
 
 signals:
     void back();

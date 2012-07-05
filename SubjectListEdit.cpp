@@ -26,6 +26,11 @@ void SubjectListEdit::goBack()
     emit back();
 }
 
+void SubjectListEdit::addSubject()
+{
+    m_subjectsModel->insertRow(m_subjectsModel->rowCount());
+}
+
 void SubjectListEdit::setGroup(Group &group_)
 {
     m_group = &group_;
