@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     EditSubject.cpp \
     SubjectSchedule.cpp \
     Group.cpp \
-    Subject.cpp
+    Subject.cpp \
+    SubjectDateModel.cpp
 
 HEADERS  += MainWindow.hpp \
     EditGroup.hpp \
@@ -27,7 +28,8 @@ HEADERS  += MainWindow.hpp \
     EditSubject.hpp \
     SubjectSchedule.hpp \
     Group.hpp \
-    Subject.hpp
+    Subject.hpp \
+    SubjectDateModel.hpp
 
 FORMS    += MainWindow.ui \
     EditGroup.ui \
