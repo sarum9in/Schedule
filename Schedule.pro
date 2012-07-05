@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     SubjectListEdit.cpp \
     EditSubject.cpp \
     SubjectSchedule.cpp \
-    Group.cpp
+    Group.cpp \
+    Subject.cpp
 
 HEADERS  += MainWindow.hpp \
     EditGroup.hpp \
     SubjectListEdit.hpp \
     EditSubject.hpp \
     SubjectSchedule.hpp \
-    Group.hpp
+    Group.hpp \
+    Subject.hpp
 
 FORMS    += MainWindow.ui \
     EditGroup.ui \
