@@ -45,7 +45,7 @@ void Subject::setHourCount(const int hourCount_)
     if (!m_dates.isNull())
     {
         while (2*m_dates->size()<m_hourCount)
-            m_dates->push_back(QDate());
+            m_dates->push_back(m_dates->back().addDays(7));
         while (2*m_dates->size()>m_hourCount)
             m_dates->pop_back();
     }
@@ -69,6 +69,8 @@ const DateList *Subject::dates() const
 void Subject::setDates(const DateList &dates_)
 {
     m_dates.reset(new DateList(dates_));
+    // fast update call
+    setHourCount(m_hourCount);
 }
 
 void Subject::clearDates()
@@ -80,7 +82,7 @@ DateList Subject::audoDates() const
 {
     DateList lst;
     lst.append(m_firstClass);
-    for (int i = 0; 2*i<m_hourCount; ++i)
+    for (int i = 1; 2*i<m_hourCount; ++i)
     {
         lst.append(lst.back().addDays(7));
     }
