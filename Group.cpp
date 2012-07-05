@@ -47,5 +47,7 @@ void Group::setSubjectNames(const QStringList &subjectNames_)
 
 Subject &Group::subject(const QString &name)
 {
-    return m_subjectByName[name];
+    Subject &subj = m_subjectByName[name];
+    subj.setName(name);
+    return subj;
 }
