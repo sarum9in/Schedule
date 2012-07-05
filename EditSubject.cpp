@@ -20,11 +20,9 @@ Subject *EditSubject::subject()
 
 void EditSubject::setSubject(Subject &subject_)
 {
-    m_subject = &subject_;
-    ui->subjectName->setText(m_subject->name());
-    ui->hourCount->setValue(m_subject->hourCount());
-    ui->firstClassDate->setDate(m_subject->firstClass());
-    if (m_subject->dates())
+    m_subject = 0;
+    ui->subjectName->setText(subject_.name());
+    if (subject_.dates())
     {
         ui->audoDates->setChecked(false);
     }
@@ -32,11 +30,16 @@ void EditSubject::setSubject(Subject &subject_)
     {
         ui->audoDates->setChecked(true);
     }
+    ui->hourCount->setValue(subject_.hourCount());
+    ui->firstClassDate->setDate(subject_.firstClass());
+    m_subject = &subject_;
     updateDates();
 }
 
 void EditSubject::accept()
 {
+    if (!m_subject)
+        return;
     m_subject->setName(ui->subjectName->text());
     m_subject->setHourCount(ui->hourCount->value());
     m_subject->setFirstClass(ui->firstClassDate->date());
@@ -63,12 +66,16 @@ void EditSubject::setDatesState(int state)
 
 void EditSubject::setHourCount(int count)
 {
+    if (!m_subject)
+        return;
     m_subject->setHourCount(count);
     accept();
 }
 
 void EditSubject::updateDates()
 {
+    if (!m_subject)
+        return;
     if (ui->audoDates->checkState()!=Qt::Checked)
     {
         Q_ASSERT(m_subject->dates());
