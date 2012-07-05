@@ -51,5 +51,25 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>backButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SubjectListEdit</receiver>
+   <slot>goBack()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>278</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>goBack()</slot>
+ </slots>
 </ui>

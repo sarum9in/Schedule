@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->course3List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
     connect(ui->course4List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
     connect(ui->course5List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
+    connect(ui->subjectListEdit, SIGNAL(back()), this, SLOT(showCourses()));
 }
 
 void MainWindow::groupClicked(const QModelIndex &index)
@@ -30,10 +31,9 @@ void MainWindow::groupClicked(const QModelIndex &index)
 void MainWindow::groupClicked(const QString &group)
 {
     Q_ASSERT(m_groupByName.contains(group));
-    EditGroup *editGroup = new EditGroup(m_groupByName, group, this);
-    editGroup->exec();
-    editGroup->deleteLater();
-    repack();
+    Group &group_ = m_groupByName[group];
+    ui->stack->setCurrentWidget(ui->subjects);
+    ui->subjectListEdit->setGroup(group_);
 }
 
 void MainWindow::repack()
@@ -53,6 +53,11 @@ void MainWindow::showAddGroupDialog()
      editGroup->exec();
      editGroup->deleteLater();
      repack();
+}
+
+void MainWindow::showCourses()
+{
+    ui->stack->setCurrentWidget(ui->courses);
 }
 
 MainWindow::~MainWindow()

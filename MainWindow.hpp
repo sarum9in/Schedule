@@ -24,6 +24,7 @@ private slots:
     void groupClicked(const QString &group);
     void repack();
     void showAddGroupDialog();
+    void showCourses();
 
 private:
     Ui::MainWindow *ui;
