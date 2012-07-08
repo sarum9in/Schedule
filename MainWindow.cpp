@@ -1,6 +1,10 @@
 #include "MainWindow.hpp"
 #include "ui_MainWindow.h"
 
+#include <QDebug>
+#include <QDir>
+#include <QDesktopServices>
+
 #include "EditGroup.hpp"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -21,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->course4List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
     connect(ui->course5List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
     connect(ui->subjectListEdit, SIGNAL(back()), this, SLOT(showCourses()));
+    load();
 }
 
 void MainWindow::groupClicked(const QModelIndex &index)
@@ -63,4 +68,52 @@ void MainWindow::showCourses()
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::closeEvent(QCloseEvent *)
+{
+    save();
+}
+
+QString MainWindow::storageDir()
+{
+    return QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+}
+
+QString MainWindow::storage()
+{
+    return storageDir()+QDir::separator()+"db.data";
+}
+
+static const quint64 magic = 0xf3adde19cf793d6bULL;
+
+void MainWindow::load()
+{
+    QFile db(storage());
+    if (db.exists())
+    {
+        const bool ret = db.open(QIODevice::ReadOnly);
+        Q_ASSERT(ret);
+        QDataStream input(&db);
+        quint64 fmagic;
+        input>>fmagic;
+        if (fmagic==::magic)
+        {
+            input>>m_groupByName;
+            repack();
+        }
+    }
+}
+
+void MainWindow::save()
+{
+    qDebug()<<storage();
+    QFile db(storage());
+    QDir dir = QDir::rootPath();
+    dir.mkpath(storageDir());
+    const bool ret = db.open(QIODevice::WriteOnly);
+    Q_ASSERT(ret);
+    QDataStream output(&db);
+    output<<magic;
+    output<<m_groupByName;
 }

@@ -87,3 +87,26 @@ Subject::operator bool() const
 {
     return hourCount();
 }
+
+QDataStream &operator>>(QDataStream &in, Subject &subject)
+{
+    bool hasDates;
+    DateList dateList;
+    in>>subject.m_hourCount>>subject.m_firstClass>>hasDates;
+    if (hasDates)
+        in>>dateList;
+    if (hasDates)
+        subject.m_dates.reset(new DateList(dateList));
+    else
+        subject.m_dates.reset();
+    return in;
+}
+
+QDataStream &operator<<(QDataStream &out, const Subject &subject)
+{
+    out<<subject.m_hourCount<<subject.m_firstClass;
+    out<<static_cast<bool>(subject.m_dates);
+    if (subject.m_dates)
+        out<<*subject.m_dates;
+    return out;
+}

@@ -51,3 +51,13 @@ SubjectGroup &Group::subject(const QString &name)
     subj.name = name;
     return subj;
 }
+
+QDataStream &operator>>(QDataStream &in, Group &group)
+{
+    return in>>group.m_name>>group.m_course>>group.m_members>>group.m_subjectNames>>group.m_subjectByName;
+}
+
+QDataStream &operator<<(QDataStream &out, const Group &group)
+{
+    return out<<group.m_name<<group.m_course<<group.m_members<<group.m_subjectNames<<group.m_subjectByName;
+}

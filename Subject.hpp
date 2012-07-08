@@ -5,6 +5,7 @@
 #include <QList>
 #include <QMap>
 #include <QScopedPointer>
+#include <QDataStream>
 
 typedef QList<QDate> DateList;
 
@@ -26,7 +27,14 @@ public:
     operator bool() const;
 
 private:
+    friend QDataStream &operator>>(QDataStream &in, Subject &subject);
+    friend QDataStream &operator<<(QDataStream &out, const Subject &subject);
+
+private:
     int m_hourCount;
     QDate m_firstClass;
     QScopedPointer<DateList> m_dates;
 };
+
+QDataStream &operator>>(QDataStream &in, Subject &subject);
+QDataStream &operator<<(QDataStream &out, const Subject &subject);
