@@ -3,13 +3,13 @@
 
 SubjectGroupSchedule::SubjectGroupSchedule(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SubjectGroupSchedule)
+    ui(new Ui::SubjectGroupSchedule),
+    m_lab(new SubjectSchedule),
+    m_lection(new SubjectSchedule),
+    m_seminar(new SubjectSchedule),
+    m_test(new SubjectSchedule)
 {
     ui->setupUi(this);
-    m_lab = new SubjectSchedule(ui->subjectScheduleTab);
-    m_lection = new SubjectSchedule(ui->subjectScheduleTab);
-    m_seminar = new SubjectSchedule(ui->subjectScheduleTab);
-    m_test = new SubjectSchedule(ui->subjectScheduleTab);
 }
 
 SubjectGroupSchedule::~SubjectGroupSchedule()
