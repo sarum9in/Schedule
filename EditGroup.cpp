@@ -44,9 +44,11 @@ void EditGroup::addStudent()
 
 void EditGroup::removeStudent()
 {
-    if (m_studentsModel->rowCount())
+    QModelIndexList selected = ui->studentList->selectionModel()->selectedIndexes();
+    if (!selected.isEmpty())
     {
-        m_studentsModel->removeRow(m_studentsModel->rowCount()-1);
+        Q_ASSERT(selected.size()==1);
+        m_studentsModel->removeRow(selected.first().row());
     }
 }
 

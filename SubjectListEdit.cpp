@@ -34,9 +34,18 @@ void SubjectListEdit::addSubject()
 {
     m_subjectsModel->insertRow(m_subjectsModel->rowCount());
     m_subjectsModel->setData(m_subjectsModel->index(m_subjectsModel->rowCount()-1), trUtf8("Новый предмет"));
-    m_group->setSubjectNames(m_subjectsModel->stringList());
     ui->editSubjectGroup->setSubjectGroup(m_group->subject(m_group->subjectNames().back()));
     ui->stackedWidget->setCurrentWidget(ui->editSubjectGroupPage);
+}
+
+void SubjectListEdit::removeSubject()
+{
+    QModelIndexList selected = ui->subjectList->selectionModel()->selectedIndexes();
+    if (!selected.isEmpty())
+    {
+        Q_ASSERT(selected.size()==1);
+        m_subjectsModel->removeRow(selected.first().row());
+    }
 }
 
 void SubjectListEdit::subjectClicked(const QModelIndex &index)
@@ -84,6 +93,10 @@ void SubjectListEdit::addStudent()
 
 void SubjectListEdit::removeStudent()
 {
-    if (m_studentsModel->rowCount())
-        m_studentsModel->removeRow(m_studentsModel->rowCount()-1);
+    QModelIndexList selected = ui->studentList->selectionModel()->selectedIndexes();
+    if (!selected.isEmpty())
+    {
+        Q_ASSERT(selected.size()==1);
+        m_studentsModel->removeRow(selected.first().row());
+    }
 }
