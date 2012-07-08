@@ -26,7 +26,7 @@ void SubjectSchedule::setGroupSubject(Group &group, Subject &subject)
         lst = *m_subject->dates();
     ui->scheduleTable->setHorizontalHeaderItem(0, new QTableWidgetItem(trUtf8("Студент")));
     for (int i = 0; 2*i<m_subject->hourCount(); ++i)
-        ui->scheduleTable->setHorizontalHeaderItem(i+1, new QTableWidgetItem(lst[i].toString()));
+        ui->scheduleTable->setHorizontalHeaderItem(i+1, new QTableWidgetItem(lst[i].toString("dd.MM")));
 }
 
 SubjectSchedule::~SubjectSchedule()
