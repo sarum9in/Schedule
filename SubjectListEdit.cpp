@@ -25,6 +25,8 @@ void SubjectListEdit::accept()
 
 void SubjectListEdit::goBack()
 {
+    m_group->setSubjectNames(m_subjectsModel->stringList());
+    m_group->setMembers(m_studentsModel->stringList());
     emit back();
 }
 
@@ -72,4 +74,16 @@ void SubjectListEdit::setGroup(Group &group_)
 SubjectListEdit::~SubjectListEdit()
 {
     delete ui;
+}
+
+void SubjectListEdit::addStudent()
+{
+    m_studentsModel->insertRow(m_studentsModel->rowCount());
+    m_studentsModel->setData(m_studentsModel->index(m_studentsModel->rowCount()-1), trUtf8("Новый студент"));
+}
+
+void SubjectListEdit::removeStudent()
+{
+    if (m_studentsModel->rowCount())
+        m_studentsModel->removeRow(m_studentsModel->rowCount()-1);
 }
