@@ -16,6 +16,7 @@ EditSubjectGroup::~EditSubjectGroup()
 void EditSubjectGroup::setSubjectGroup(SubjectGroup &sg)
 {
     m_subjectGroup = &sg;
+    ui->name->setText(sg.name);
     ui->lab->setSubject(m_subjectGroup->lab);
     ui->lection->setSubject(m_subjectGroup->lection);
     ui->seminar->setSubject(m_subjectGroup->seminar);
