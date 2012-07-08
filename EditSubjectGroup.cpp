@@ -3,7 +3,8 @@
 
 EditSubjectGroup::EditSubjectGroup(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::EditSubjectGroup)
+    ui(new Ui::EditSubjectGroup),
+    m_subjectGroup(0)
 {
     ui->setupUi(this);
 }
