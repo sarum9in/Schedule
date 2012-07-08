@@ -13,8 +13,8 @@ SubjectListEdit::SubjectListEdit(QWidget *parent) :
     ui->subjectList->setModel(m_subjectsModel);
     connect(m_studentsModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(accept()));
     connect(m_subjectsModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(accept()));
-    connect(ui->editSubject, SIGNAL(back()), this, SLOT(showSubjectList()));
-    connect(ui->subjectSchedule, SIGNAL(back()), this, SLOT(showSubjectList()));
+    connect(ui->editSubjectGroup, SIGNAL(back()), this, SLOT(showSubjectList()));
+    connect(ui->subjectGroupSchedule, SIGNAL(back()), this, SLOT(showSubjectList()));
 }
 
 void SubjectListEdit::accept()
@@ -33,8 +33,8 @@ void SubjectListEdit::addSubject()
     m_subjectsModel->insertRow(m_subjectsModel->rowCount());
     m_subjectsModel->setData(m_subjectsModel->index(m_subjectsModel->rowCount()-1), trUtf8("Новый предмет"));
     m_group->setSubjectNames(m_subjectsModel->stringList());
-    ui->editSubject->setSubject(m_group->subject(m_group->subjectNames().back()));
-    ui->stackedWidget->setCurrentWidget(ui->editSubjectPage);
+    ui->editSubjectGroup->setSubjectGroup(m_group->subject(m_group->subjectNames().back()));
+    ui->stackedWidget->setCurrentWidget(ui->editSubjectGroupPage);
 }
 
 void SubjectListEdit::subjectClicked(const QModelIndex &index)
@@ -44,20 +44,20 @@ void SubjectListEdit::subjectClicked(const QModelIndex &index)
 
 void SubjectListEdit::subjectClicked(const QString &subject)
 {
-    Subject &subj = m_group->subject(subject);
-    ui->subjectSchedule->setGroupSubject(*m_group, subj);
-    ui->stackedWidget->setCurrentWidget(ui->subjectSchedulePage);
+    SubjectGroup &subj = m_group->subject(subject);
+    ui->subjectGroupSchedule->setGroupSubject(*m_group, subj);
+    ui->stackedWidget->setCurrentWidget(ui->subjectGroupSchedulePage);
 }
 
 void SubjectListEdit::showSubjectList()
 {
     ui->stackedWidget->setCurrentWidget(ui->subjectListPage);
     QStringList lst = m_group->subjectNames();
-    Subject &subj = *ui->editSubject->subject();
+    SubjectGroup &subj = *ui->editSubjectGroup->subjectGroup();
     lst.pop_back();
-    lst.push_back(subj.name());
+    lst.push_back(subj.name);
     m_group->setSubjectNames(lst);
-    m_group->subject(subj.name()) = subj;
+    m_group->subject(subj.name) = subj;
     m_subjectsModel->setStringList(m_group->subjectNames());
 }
 

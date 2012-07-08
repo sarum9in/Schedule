@@ -20,27 +20,14 @@
       <enum>QFormLayout::ExpandingFieldsGrow</enum>
      </property>
      <item row="0" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Название</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="subjectName"/>
-     </item>
-     <item row="1" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>Количество часов</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="0" column="1">
       <widget class="QSpinBox" name="hourCount">
-       <property name="minimum">
-        <number>2</number>
-       </property>
        <property name="maximum">
         <number>1000</number>
        </property>
@@ -49,14 +36,14 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
         <string>Первое занятие</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="1" column="1">
       <widget class="QDateEdit" name="firstClassDate"/>
      </item>
     </layout>
@@ -75,15 +62,8 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QPushButton" name="backwardButton">
-     <property name="text">
-      <string>Готово</string>
-     </property>
-    </widget>
-   </item>
    <item row="3" column="1">
-    <widget class="QCheckBox" name="audoDates">
+    <widget class="QCheckBox" name="autoDates">
      <property name="text">
       <string>Проставить автоматически</string>
      </property>
@@ -94,23 +74,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>backwardButton</sender>
-   <signal>clicked()</signal>
-   <receiver>EditSubject</receiver>
-   <slot>goBack()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>144</x>
-     <y>364</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>282</x>
-     <y>192</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>audoDates</sender>
+   <sender>autoDates</sender>
    <signal>stateChanged(int)</signal>
    <receiver>EditSubject</receiver>
    <slot>setDatesState(int)</slot>

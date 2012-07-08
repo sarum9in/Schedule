@@ -12,43 +12,12 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Subject (course group группа)</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QPushButton" name="backwardButton">
-     <property name="text">
-      <string>Назад</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
     <widget class="QTableWidget" name="scheduleTable"/>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>backwardButton</sender>
-   <signal>clicked()</signal>
-   <receiver>SubjectSchedule</receiver>
-   <slot>goBack()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>199</x>
-     <y>278</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>149</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>goBack()</slot>
  </slots>

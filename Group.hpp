@@ -1,12 +1,11 @@
-#ifndef GROUP_HPP
-#define GROUP_HPP
+#pragma once
 
 #include <QString>
 #include <QStringList>
 #include <QList>
 #include <QMap>
 
-#include "Subject.hpp"
+#include "SubjectGroup.hpp"
 
 class Group
 {
@@ -20,17 +19,15 @@ public:
     void setMembers(const QStringList &members_);
     const QStringList &subjectNames() const;
     void setSubjectNames(const QStringList &subjectNames_);
-    Subject &subject(const QString &name);
+    SubjectGroup &subject(const QString &name);
 
 private:
     QString m_name;
     int m_course;
     QStringList m_members;
     QStringList m_subjectNames;
-    SubjectByNameMap m_subjectByName;
+    SubjectGroupByNameMap m_subjectByName;
 };
 
 typedef QList<Group> GroupList;
 typedef QMap<QString, Group> GroupByNameMap;
-
-#endif // GROUP_HPP

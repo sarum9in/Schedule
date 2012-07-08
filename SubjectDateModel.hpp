@@ -1,5 +1,4 @@
-#ifndef SUBJECTDATEMODEL_HPP
-#define SUBJECTDATEMODEL_HPP
+#pragma once
 
 #include <QAbstractListModel>
 
@@ -25,5 +24,3 @@ private:
     bool m_editable;
     DateList m_dateList;
 };
-
-#endif // SUBJECTDATEMODEL_HPP

@@ -1,5 +1,4 @@
-#ifndef EDITSUBJECT_HPP
-#define EDITSUBJECT_HPP
+#pragma once
 
 #include <QWidget>
 
@@ -22,18 +21,12 @@ public:
 
 private slots:
     void accept();
-    void goBack();
     void setDatesState(int state);
     void setHourCount(int count);
     void updateDates();
-
-signals:
-    void back();
 
 private:
     Ui::EditSubject *ui;
     Subject *m_subject;
     SubjectDateModel *m_subjectDateModel;
 };
-
-#endif // EDITSUBJECT_HPP

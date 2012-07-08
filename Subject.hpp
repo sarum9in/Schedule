@@ -1,5 +1,4 @@
-#ifndef SUBJECT_HPP
-#define SUBJECT_HPP
+#pragma once
 
 #include <QString>
 #include <QDate>
@@ -15,8 +14,6 @@ public:
     Subject();
     Subject(const Subject &subj);
     Subject &operator=(const Subject &subj);
-    const QString &name() const;
-    void setName(const QString &name_);
     int hourCount() const;
     void setHourCount(const int hourCount_);
     const QDate &firstClass() const;
@@ -24,15 +21,12 @@ public:
     const DateList *dates() const;
     void setDates(const DateList &dates_);
     void clearDates();
-    DateList audoDates() const;
+    DateList autoDates() const;
+
+    operator bool() const;
 
 private:
-    QString m_name;
     int m_hourCount;
     QDate m_firstClass;
     QScopedPointer<DateList> m_dates;
 };
-
-typedef QMap<QString, Subject> SubjectByNameMap;
-
-#endif // SUBJECT_HPP

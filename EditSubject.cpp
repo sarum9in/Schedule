@@ -8,27 +8,28 @@ EditSubject::EditSubject(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->classList->setModel(m_subjectDateModel);
-    connect(ui->subjectName, SIGNAL(textChanged(QString)), this, SLOT(accept()));
     connect(ui->firstClassDate, SIGNAL(dateChanged(QDate)), this, SLOT(accept()));
-    connect(ui->audoDates, SIGNAL(clicked()), this, SLOT(accept()));
+    connect(ui->autoDates, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
 Subject *EditSubject::subject()
 {
-    return m_subject;
+    if (ui->hourCount->value())
+        return m_subject;
+    else
+        return 0;
 }
 
 void EditSubject::setSubject(Subject &subject_)
 {
     m_subject = 0;
-    ui->subjectName->setText(subject_.name());
     if (subject_.dates())
     {
-        ui->audoDates->setChecked(false);
+        ui->autoDates->setChecked(false);
     }
     else
     {
-        ui->audoDates->setChecked(true);
+        ui->autoDates->setChecked(true);
     }
     ui->hourCount->setValue(subject_.hourCount());
     ui->firstClassDate->setDate(subject_.firstClass());
@@ -40,21 +41,14 @@ void EditSubject::accept()
 {
     if (!m_subject)
         return;
-    m_subject->setName(ui->subjectName->text());
     m_subject->setHourCount(ui->hourCount->value());
     m_subject->setFirstClass(ui->firstClassDate->date());
     m_subject->clearDates();
-    if (ui->audoDates->checkState()!=Qt::Checked)
+    if (ui->autoDates->checkState()!=Qt::Checked)
     {
         m_subject->setDates(m_subjectDateModel->dateList());
     }
     updateDates();
-}
-
-void EditSubject::goBack()
-{
-    accept();
-    emit back();
 }
 
 void EditSubject::setDatesState(int state)
@@ -76,7 +70,7 @@ void EditSubject::updateDates()
 {
     if (!m_subject)
         return;
-    if (ui->audoDates->checkState()!=Qt::Checked)
+    if (ui->autoDates->checkState()!=Qt::Checked)
     {
         Q_ASSERT(m_subject->dates());
         m_subjectDateModel->setEditable(true);
@@ -86,7 +80,7 @@ void EditSubject::updateDates()
     {
         Q_ASSERT(!m_subject->dates());
         m_subjectDateModel->setEditable(false);
-        m_subjectDateModel->setDateList(m_subject->audoDates());
+        m_subjectDateModel->setDateList(m_subject->autoDates());
     }
 }
 

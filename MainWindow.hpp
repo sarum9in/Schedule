@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_HPP
-#define MAINWINDOW_HPP
+#pragma once
 
 #include <QMainWindow>
 #include <QModelIndex>
@@ -31,5 +30,3 @@ private:
     GroupByNameMap m_groupByName;
     QStringListModel *m_course[5];
 };
-
-#endif // MAINWINDOW_HPP

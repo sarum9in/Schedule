@@ -57,17 +57,17 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="editSubjectPage">
+     <widget class="QWidget" name="editSubjectGroupPage">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="EditSubject" name="editSubject" native="true"/>
+        <widget class="EditSubjectGroup" name="editSubjectGroup" native="true"/>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="subjectSchedulePage">
+     <widget class="QWidget" name="subjectGroupSchedulePage">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="SubjectSchedule" name="subjectSchedule" native="true"/>
+        <widget class="SubjectGroupSchedule" name="subjectGroupSchedule" native="true"/>
        </item>
       </layout>
      </widget>
@@ -77,15 +77,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>EditSubject</class>
+   <class>EditSubjectGroup</class>
    <extends>QWidget</extends>
-   <header>EditSubject.hpp</header>
+   <header>EditSubjectGroup.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>SubjectSchedule</class>
+   <class>SubjectGroupSchedule</class>
    <extends>QWidget</extends>
-   <header>SubjectSchedule.hpp</header>
+   <header>SubjectGroupSchedule.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

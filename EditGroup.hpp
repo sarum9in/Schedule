@@ -1,5 +1,4 @@
-#ifndef EDITGROUP_HPP
-#define EDITGROUP_HPP
+#pragma once
 
 #include <QDialog>
 #include <QStringListModel>
@@ -30,5 +29,3 @@ private:
     Group m_group;
     const QString m_name;
 };
-
-#endif // EDITGROUP_HPP

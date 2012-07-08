@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditSubjectGroup</class>
+ <widget class="QWidget" name="EditSubjectGroup">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="name"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Название</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="subjectEditTab">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="lectionTab">
+      <attribute name="title">
+       <string>Лекции</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="EditSubject" name="lection" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="labTab">
+      <attribute name="title">
+       <string>Лабораторные</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="EditSubject" name="lab" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="seminarTab">
+      <attribute name="title">
+       <string>Семинары</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="EditSubject" name="seminar" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="testTab">
+      <attribute name="title">
+       <string>Контрольные</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="EditSubject" name="test" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="backwardButton">
+     <property name="text">
+      <string>Готово</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>EditSubject</class>
+   <extends>QWidget</extends>
+   <header>EditSubject.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>backwardButton</sender>
+   <signal>clicked()</signal>
+   <receiver>EditSubjectGroup</receiver>
+   <slot>goBack()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>278</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>goBack()</slot>
+ </slots>
+</ui>

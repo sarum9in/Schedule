@@ -1,5 +1,4 @@
-#ifndef SUBJECTLISTEDIT_HPP
-#define SUBJECTLISTEDIT_HPP
+#pragma once
 
 #include <QWidget>
 #include <QStringListModel>
@@ -36,5 +35,3 @@ private:
     QStringListModel *m_studentsModel;
     QStringListModel *m_subjectsModel;
 };
-
-#endif // SUBJECTLISTEDIT_HPP
