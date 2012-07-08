@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include <QScopedPointer>
 
 #include "Subject.hpp"
 #include "SubjectDateModel.hpp"
@@ -15,8 +16,8 @@ class EditSubject : public QWidget
 
 public:
     explicit EditSubject(QWidget *parent = 0);
-    Subject *subject();
-    void setSubject(Subject &subject_);
+    Subject subject() const;
+    void setSubject(const Subject &subject_);
     ~EditSubject();
 
 private slots:
@@ -27,6 +28,6 @@ private slots:
 
 private:
     Ui::EditSubject *ui;
-    Subject *m_subject;
+    QScopedPointer<Subject> m_subject;
     SubjectDateModel *m_subjectDateModel;
 };

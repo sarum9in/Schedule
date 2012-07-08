@@ -12,17 +12,15 @@ EditSubject::EditSubject(QWidget *parent) :
     connect(ui->autoDates, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
-Subject *EditSubject::subject()
+Subject EditSubject::subject() const
 {
-    if (ui->hourCount->value())
-        return m_subject;
-    else
-        return 0;
+    Q_ASSERT(m_subject);
+    return *m_subject;
 }
 
-void EditSubject::setSubject(Subject &subject_)
+void EditSubject::setSubject(const Subject &subject_)
 {
-    m_subject = 0;
+    m_subject.reset();
     if (subject_.dates())
     {
         ui->autoDates->setChecked(false);
@@ -33,7 +31,7 @@ void EditSubject::setSubject(Subject &subject_)
     }
     ui->hourCount->setValue(subject_.hourCount());
     ui->firstClassDate->setDate(subject_.firstClass());
-    m_subject = &subject_;
+    m_subject.reset(new Subject(subject_));
     updateDates();
 }
 

@@ -29,9 +29,10 @@ SubjectGroup *EditSubjectGroup::subjectGroup()
 
 void EditSubjectGroup::goBack()
 {
-    m_subjectGroup->lab = *ui->lab->subject();
-    m_subjectGroup->lection = *ui->lection->subject();
-    m_subjectGroup->seminar = *ui->seminar->subject();
-    m_subjectGroup->test = *ui->test->subject();
+    m_subjectGroup->name = ui->name->text();
+    m_subjectGroup->lab = ui->lab->subject();
+    m_subjectGroup->lection = ui->lection->subject();
+    m_subjectGroup->seminar = ui->seminar->subject();
+    m_subjectGroup->test = ui->test->subject();
     emit back();
 }
