@@ -18,9 +18,10 @@ public:
     void setCourse(const int course_);
     const QStringList &members() const;
     void setMembers(const QStringList &members_);
-    const QStringList &subjectNames() const;
-    void setSubjectNames(const QStringList &subjectNames_);
-    SubjectGroup &subject(const QString &name);
+    QStringList subjectNames() const;
+    void appendSubject();
+    void removeSubject(const int n);
+    SubjectGroup &subject(const int n);
 
 private:
     friend QDataStream &operator>>(QDataStream &in, Group &group);
@@ -30,8 +31,7 @@ private:
     QString m_name;
     int m_course;
     QStringList m_members;
-    QStringList m_subjectNames;
-    SubjectGroupByNameMap m_subjectByName;
+    SubjectGroupList m_subjects;
 };
 
 QDataStream &operator>>(QDataStream &in, Group &group);

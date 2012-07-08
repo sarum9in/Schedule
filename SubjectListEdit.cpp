@@ -20,21 +20,19 @@ SubjectListEdit::SubjectListEdit(QWidget *parent) :
 void SubjectListEdit::accept()
 {
     m_group->setMembers(m_studentsModel->stringList());
-    m_group->setSubjectNames(m_subjectsModel->stringList());
 }
 
 void SubjectListEdit::goBack()
 {
-    m_group->setSubjectNames(m_subjectsModel->stringList());
     m_group->setMembers(m_studentsModel->stringList());
     emit back();
 }
 
 void SubjectListEdit::addSubject()
 {
-    m_subjectsModel->insertRow(m_subjectsModel->rowCount());
-    m_subjectsModel->setData(m_subjectsModel->index(m_subjectsModel->rowCount()-1), trUtf8("Новый предмет"));
-    ui->editSubjectGroup->setSubjectGroup(m_group->subject(m_group->subjectNames().back()));
+    m_group->appendSubject();
+    m_subjectsModel->setStringList(m_group->subjectNames());
+    ui->editSubjectGroup->setSubjectGroup(m_group->subject(m_subjectsModel->rowCount()-1));
     ui->stackedWidget->setCurrentWidget(ui->editSubjectGroupPage);
 }
 
@@ -50,12 +48,12 @@ void SubjectListEdit::removeSubject()
 
 void SubjectListEdit::subjectClicked(const QModelIndex &index)
 {
-    subjectClicked(index.data().toString());
+    subjectClicked(index.row());
 }
 
-void SubjectListEdit::subjectClicked(const QString &subject)
+void SubjectListEdit::subjectClicked(const int n)
 {
-    SubjectGroup &subj = m_group->subject(subject);
+    SubjectGroup &subj = m_group->subject(n);
     ui->subjectGroupSchedule->setGroupSubject(*m_group, subj);
     ui->stackedWidget->setCurrentWidget(ui->subjectGroupSchedulePage);
 }
@@ -65,10 +63,7 @@ void SubjectListEdit::showSubjectList()
     ui->stackedWidget->setCurrentWidget(ui->subjectListPage);
     QStringList lst = m_group->subjectNames();
     SubjectGroup &subj = *ui->editSubjectGroup->subjectGroup();
-    lst.pop_back();
-    lst.push_back(subj.name);
-    m_group->setSubjectNames(lst);
-    m_group->subject(subj.name) = subj;
+    m_group->subject(m_subjectsModel->rowCount()-1) = subj;
     m_subjectsModel->setStringList(m_group->subjectNames());
 }
 

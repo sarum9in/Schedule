@@ -35,29 +35,40 @@ void Group::setMembers(const QStringList &members_)
     m_members = members_;
 }
 
-const QStringList &Group::subjectNames() const
+QStringList Group::subjectNames() const
 {
-    return m_subjectNames;
+    QStringList lst;
+    foreach (const SubjectGroup &sg, m_subjects)
+    {
+        lst.append(sg.name);
+    }
+    return lst;
 }
 
-void Group::setSubjectNames(const QStringList &subjectNames_)
+void Group::appendSubject()
 {
-    m_subjectNames = subjectNames_;
+    m_subjects.append(SubjectGroup());
+    m_subjects.back().name = QObject::trUtf8("Новый предмет");
 }
 
-SubjectGroup &Group::subject(const QString &name)
+void Group::removeSubject(const int n)
 {
-    SubjectGroup &subj = m_subjectByName[name];
-    subj.name = name;
+    Q_ASSERT(0<=n && n<m_subjects.size());
+    m_subjects.erase(m_subjects.begin()+n);
+}
+
+SubjectGroup &Group::subject(const int n)
+{
+    SubjectGroup &subj = m_subjects[n];
     return subj;
 }
 
 QDataStream &operator>>(QDataStream &in, Group &group)
 {
-    return in>>group.m_name>>group.m_course>>group.m_members>>group.m_subjectNames>>group.m_subjectByName;
+    return in>>group.m_name>>group.m_course>>group.m_members>>group.m_subjects;
 }
 
 QDataStream &operator<<(QDataStream &out, const Group &group)
 {
-    return out<<group.m_name<<group.m_course<<group.m_members<<group.m_subjectNames<<group.m_subjectByName;
+    return out<<group.m_name<<group.m_course<<group.m_members<<group.m_subjects;
 }

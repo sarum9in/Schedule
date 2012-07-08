@@ -24,7 +24,7 @@ private slots:
     void addSubject();
     void removeSubject();
     void subjectClicked(const QModelIndex &index);
-    void subjectClicked(const QString &subject);
+    void subjectClicked(const int n);
     void showSubjectList();
     void addStudent();
     void removeStudent();

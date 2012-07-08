@@ -16,4 +16,4 @@ struct SubjectGroup
 QDataStream &operator>>(QDataStream &in, SubjectGroup &sg);
 QDataStream &operator<<(QDataStream &out, const SubjectGroup &sg);
 
-typedef QMap<QString, SubjectGroup> SubjectGroupByNameMap;
+typedef QList<SubjectGroup> SubjectGroupList;
