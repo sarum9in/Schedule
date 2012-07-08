@@ -85,7 +85,7 @@ QString MainWindow::storage()
     return storageDir()+QDir::separator()+"db.data";
 }
 
-static const quint64 magic = 0xf3adde19cf793d6bULL;
+static const quint64 magic = 0xf3adde19df793d6bULL;
 
 void MainWindow::load()
 {
