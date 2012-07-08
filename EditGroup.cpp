@@ -10,6 +10,7 @@ EditGroup::EditGroup(GroupByNameMap &groupByName_, const QString &group, QWidget
     m_groupByName(groupByName_),
     m_name(group)
 {
+    connect(m_studentsModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(memberChanged(QModelIndex,QModelIndex)));
     ui->setupUi(this);
     ui->studentList->setModel(m_studentsModel);
     if (m_groupByName.contains(group))
@@ -23,7 +24,6 @@ void EditGroup::accept()
 {
     m_group.setName(ui->group->text());
     m_group.setCourse(ui->course->currentIndex()+1);
-    m_group.setMembers(m_studentsModel->stringList());
     if (m_groupByName.contains(m_group.name()) && m_group.name()!=m_name)
     {
         QMessageBox::warning(this, trUtf8("Ошибка"), trUtf8("Такая группа уже существует!"));
@@ -38,8 +38,8 @@ void EditGroup::accept()
 
 void EditGroup::addStudent()
 {
-    m_studentsModel->insertRow(m_studentsModel->rowCount());
-    m_studentsModel->setData(m_studentsModel->index(m_studentsModel->rowCount()-1), trUtf8("Новый студент"));
+    m_group.appendMember();
+    m_studentsModel->setStringList(m_group.members());
 }
 
 void EditGroup::removeStudent()
@@ -48,7 +48,15 @@ void EditGroup::removeStudent()
     if (!selected.isEmpty())
     {
         Q_ASSERT(selected.size()==1);
-        m_studentsModel->removeRow(selected.first().row());
+        m_group.removeMember(selected.first().row());
+    }
+}
+
+void EditGroup::memberChanged(const QModelIndex &a, const QModelIndex &b)
+{
+    if (a.row()==b.row())
+    {
+        m_group.member(a.row()).name = a.data().toString();
     }
 }
 

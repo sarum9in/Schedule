@@ -7,6 +7,7 @@
 #include <QMap>
 
 #include "SubjectGroup.hpp"
+#include "Student.hpp"
 
 class Group
 {
@@ -16,8 +17,10 @@ public:
     void setName(const QString &name_);
     int course() const;
     void setCourse(const int course_);
-    const QStringList &members() const;
-    void setMembers(const QStringList &members_);
+    QStringList members() const;
+    void appendMember();
+    void removeMember(const int n);
+    Student &member(const int n);
     QStringList subjectNames() const;
     void appendSubject();
     void removeSubject(const int n);
@@ -30,7 +33,7 @@ private:
 private:
     QString m_name;
     int m_course;
-    QStringList m_members;
+    StudentList m_members;
     SubjectGroupList m_subjects;
 };
 

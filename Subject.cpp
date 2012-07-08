@@ -11,6 +11,8 @@ Subject::Subject(const Subject &subj):
 {
     if (subj.m_dates)
         m_dates.reset(new DateList(*subj.m_dates.data()));
+    else
+        m_dates.reset();
 }
 
 Subject &Subject::operator=(const Subject &subj)
@@ -20,7 +22,9 @@ Subject &Subject::operator=(const Subject &subj)
         m_hourCount = subj.m_hourCount;
         m_firstClass = subj.m_firstClass;
         if (subj.m_dates)
-            m_dates.reset(new DateList(*subj.m_dates.data()));
+            m_dates.reset(new DateList(*subj.m_dates));
+        else
+            m_dates.reset();
     }
     return *this;
 }

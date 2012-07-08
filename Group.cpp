@@ -25,14 +25,30 @@ void Group::setCourse(const int course_)
     m_course = course_;
 }
 
-const QStringList &Group::members() const
+QStringList Group::members() const
 {
-    return m_members;
+    QStringList lst;
+    foreach (const Student &student, m_members)
+    {
+        lst.append(student.name);
+    }
+    return lst;
 }
 
-void Group::setMembers(const QStringList &members_)
+void Group::appendMember()
 {
-    m_members = members_;
+    m_members.append(Student());
+    m_members.back().name = QObject::trUtf8("Новый студент");
+}
+
+void Group::removeMember(const int n)
+{
+    m_members.erase(m_members.begin()+n);
+}
+
+Student &Group::member(const int n)
+{
+    return m_members[n];
 }
 
 QStringList Group::subjectNames() const

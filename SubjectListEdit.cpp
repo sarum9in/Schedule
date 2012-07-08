@@ -8,6 +8,7 @@ SubjectListEdit::SubjectListEdit(QWidget *parent) :
     m_studentsModel(new QStringListModel(this)),
     m_subjectsModel(new QStringListModel(this))
 {
+    connect(m_studentsModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(studentChanged(QModelIndex,QModelIndex)));
     ui->setupUi(this);
     ui->studentList->setModel(m_studentsModel);
     ui->subjectList->setModel(m_subjectsModel);
@@ -19,12 +20,10 @@ SubjectListEdit::SubjectListEdit(QWidget *parent) :
 
 void SubjectListEdit::accept()
 {
-    m_group->setMembers(m_studentsModel->stringList());
 }
 
 void SubjectListEdit::goBack()
 {
-    m_group->setMembers(m_studentsModel->stringList());
     emit back();
 }
 
@@ -46,6 +45,30 @@ void SubjectListEdit::removeSubject()
     }
 }
 
+void SubjectListEdit::addStudent()
+{
+    m_group->appendMember();
+    m_studentsModel->setStringList(m_group->members());
+}
+
+void SubjectListEdit::removeStudent()
+{
+    QModelIndexList selected = ui->studentList->selectionModel()->selectedIndexes();
+    if (!selected.isEmpty())
+    {
+        Q_ASSERT(selected.size()==1);
+        m_group->removeMember(selected.first().row());
+    }
+}
+
+void SubjectListEdit::studentChanged(const QModelIndex &a, const QModelIndex &b)
+{
+    if (a.row()==b.row())
+    {
+        m_group->member(a.row()).name = a.data().toString();
+    }
+}
+
 void SubjectListEdit::subjectClicked(const QModelIndex &index)
 {
     subjectClicked(index.row());
@@ -61,9 +84,8 @@ void SubjectListEdit::subjectClicked(const int n)
 void SubjectListEdit::showSubjectList()
 {
     ui->stackedWidget->setCurrentWidget(ui->subjectListPage);
-    QStringList lst = m_group->subjectNames();
-    SubjectGroup &subj = *ui->editSubjectGroup->subjectGroup();
-    m_group->subject(m_subjectsModel->rowCount()-1) = subj;
+    if (ui->editSubjectGroup->subjectGroup())
+        m_group->subject(m_subjectsModel->rowCount()-1) = *ui->editSubjectGroup->subjectGroup();
     m_subjectsModel->setStringList(m_group->subjectNames());
 }
 
@@ -78,20 +100,4 @@ void SubjectListEdit::setGroup(Group &group_)
 SubjectListEdit::~SubjectListEdit()
 {
     delete ui;
-}
-
-void SubjectListEdit::addStudent()
-{
-    m_studentsModel->insertRow(m_studentsModel->rowCount());
-    m_studentsModel->setData(m_studentsModel->index(m_studentsModel->rowCount()-1), trUtf8("Новый студент"));
-}
-
-void SubjectListEdit::removeStudent()
-{
-    QModelIndexList selected = ui->studentList->selectionModel()->selectedIndexes();
-    if (!selected.isEmpty())
-    {
-        Q_ASSERT(selected.size()==1);
-        m_studentsModel->removeRow(selected.first().row());
-    }
 }

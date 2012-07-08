@@ -28,6 +28,7 @@ private slots:
     void showSubjectList();
     void addStudent();
     void removeStudent();
+    void studentChanged(const QModelIndex &a, const QModelIndex &b);
 
 signals:
     void back();

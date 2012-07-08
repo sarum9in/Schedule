@@ -21,6 +21,7 @@ public:
 private slots:
     void addStudent();
     void removeStudent();
+    void memberChanged(const QModelIndex &a, const QModelIndex &b);
 
 private:
     Ui::EditGroup *ui;
