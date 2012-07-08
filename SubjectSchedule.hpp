@@ -14,11 +14,16 @@ class SubjectSchedule : public QWidget
 
 public:
     explicit SubjectSchedule(QWidget *parent = 0);
-    void setGroupSubject(Group &group, Subject &subject);
+    void setGroupSubject(Group &group, const QString &m_subjectId, Subject &subject);
     ~SubjectSchedule();
+
+private slots:
+    void cellChanged(int row, int column);
 
 private:
     Ui::SubjectSchedule *ui;
     Group *m_group;
     Subject *m_subject;
+    DateList m_dates;
+    QString m_subjectId;
 };

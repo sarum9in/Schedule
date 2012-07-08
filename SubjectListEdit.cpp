@@ -48,7 +48,7 @@ void SubjectListEdit::removeSubject()
 void SubjectListEdit::addStudent()
 {
     m_group->appendMember();
-    m_studentsModel->setStringList(m_group->members());
+    m_studentsModel->setStringList(m_group->memberNames());
 }
 
 void SubjectListEdit::removeStudent()
@@ -93,7 +93,7 @@ void SubjectListEdit::setGroup(Group &group_)
 {
     m_group = &group_;
     ui->courseAndGroup->setText(trUtf8("%1 курс %2 группа").arg(m_group->course()).arg(m_group->name()));
-    m_studentsModel->setStringList(m_group->members());
+    m_studentsModel->setStringList(m_group->memberNames());
     m_subjectsModel->setStringList(m_group->subjectNames());
 }
 

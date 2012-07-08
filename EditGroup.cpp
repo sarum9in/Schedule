@@ -17,7 +17,7 @@ EditGroup::EditGroup(GroupByNameMap &groupByName_, const QString &group, QWidget
         m_group = m_groupByName.value(group);
     ui->group->setText(m_group.name());
     ui->course->setCurrentIndex(m_group.course()-1);
-    m_studentsModel->setStringList(m_group.members());
+    m_studentsModel->setStringList(m_group.memberNames());
 }
 
 void EditGroup::accept()
@@ -39,7 +39,7 @@ void EditGroup::accept()
 void EditGroup::addStudent()
 {
     m_group.appendMember();
-    m_studentsModel->setStringList(m_group.members());
+    m_studentsModel->setStringList(m_group.memberNames());
 }
 
 void EditGroup::removeStudent()

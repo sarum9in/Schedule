@@ -20,5 +20,6 @@
  <connections/>
  <slots>
   <slot>goBack()</slot>
+  <slot>cellChanged(int,int)</slot>
  </slots>
 </ui>

@@ -26,7 +26,7 @@ void SubjectGroupSchedule::setGroupSubject(Group &group, SubjectGroup &subject)
 #define ADD_TAB(NAME, TEXT) \
     if (m_subjectGroup->NAME) \
     { \
-        m_##NAME->setGroupSubject(*m_group, m_subjectGroup->NAME); \
+        m_##NAME->setGroupSubject(*m_group, subject.name+"::"+TEXT, m_subjectGroup->NAME); \
         ui->subjectScheduleTab->addTab(m_##NAME, TEXT); \
     }
     ADD_TAB(lection, trUtf8("Лекции"));

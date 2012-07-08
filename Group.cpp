@@ -25,7 +25,7 @@ void Group::setCourse(const int course_)
     m_course = course_;
 }
 
-QStringList Group::members() const
+QStringList Group::memberNames() const
 {
     QStringList lst;
     foreach (const Student &student, m_members)
@@ -33,6 +33,11 @@ QStringList Group::members() const
         lst.append(student.name);
     }
     return lst;
+}
+
+void Group::setMembers(const StudentList &studentList)
+{
+    m_members = studentList;
 }
 
 void Group::appendMember()
@@ -77,6 +82,11 @@ SubjectGroup &Group::subject(const int n)
 {
     SubjectGroup &subj = m_subjects[n];
     return subj;
+}
+
+const StudentList &Group::members() const
+{
+    return m_members;
 }
 
 QDataStream &operator>>(QDataStream &in, Group &group)

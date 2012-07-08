@@ -17,7 +17,9 @@ public:
     void setName(const QString &name_);
     int course() const;
     void setCourse(const int course_);
-    QStringList members() const;
+    QStringList memberNames() const;
+    const StudentList &members() const;
+    void setMembers(const StudentList &studentList);
     void appendMember();
     void removeMember(const int n);
     Student &member(const int n);
