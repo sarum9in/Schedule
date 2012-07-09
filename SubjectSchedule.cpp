@@ -6,6 +6,9 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QPainter>
 
 SubjectSchedule::SubjectSchedule(QWidget *parent) :
     QWidget(parent),
@@ -108,6 +111,26 @@ void SubjectSchedule::saveTable()
         }
         out<<"</html>\n";
     }
+}
+
+void SubjectSchedule::printTable()
+{
+    QPrintDialog *dialog = new QPrintDialog(this);
+    if (dialog->exec()==QDialog::Accepted)
+    {
+        QWidget *widget = ui->scheduleTable;
+        QPrinter *printer = dialog->printer();
+        QPainter painter(printer);
+        double xscale = printer->pageRect().width()/double(widget->width());
+        double yscale = printer->pageRect().height()/double(widget->height());
+        double scale = qMin(xscale, yscale);
+        painter.translate(printer->paperRect().x() + printer->pageRect().width()/2,
+                           printer->paperRect().y() + printer->pageRect().height()/2);
+        painter.scale(scale, scale);
+        painter.translate(-width()/2, -height()/2);
+        widget->render(&painter);
+    }
+    dialog->deleteLater();
 }
 
 SubjectSchedule::~SubjectSchedule()
