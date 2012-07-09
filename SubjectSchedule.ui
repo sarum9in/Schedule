@@ -14,12 +14,37 @@
    <item row="0" column="0">
     <widget class="QTableWidget" name="scheduleTable"/>
    </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="printButton">
+     <property name="text">
+      <string>Распечатать</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>printButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SubjectSchedule</receiver>
+   <slot>printTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>278</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>goBack()</slot>
   <slot>cellChanged(int,int)</slot>
+  <slot>printTable()</slot>
  </slots>
 </ui>
