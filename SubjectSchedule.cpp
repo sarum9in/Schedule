@@ -69,33 +69,35 @@ void SubjectSchedule::saveTable()
     else
     {
         QTextStream out(&file);
+        out.setCodec("UTF-8");
         out<<"<html>\n";
         {
             out<<"<head>\n";
-            out<<"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
+            out<<"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n";
             out<<"</head>\n";
         }
         {
             out<<"<body>\n";
             {
                 out<<"<table border=\"1\">\n";
+                out<<"<caption>"<<escape(trUtf8("%1 (%2 курс %3 группа)").arg(m_subjectId).arg(m_group->course()).arg(m_group->name()))<<"</caption>\n";
                 {
                     out<<"<tr>";
-                    out<<"<th>"+escape(trUtf8("Студент")).toUtf8()+"</th>";
+                    out<<"<th>"+escape(trUtf8("Студент"))+"</th>";
                     foreach (const QDate &date, m_dates)
                     {
-                        out<<"<th>"<<escape(date.toString("dd.MM")).toUtf8()<<"</th>";
+                        out<<"<th>"<<escape(date.toString("dd.MM"))<<"</th>";
                     }
                     out<<"</tr>\n";
                 }
                 foreach (const Student &student, m_group->members())
                 {
                     out<<"<tr>";
-                    out<<"<th>"<<escape(student.name).toUtf8()<<"</th>";
+                    out<<"<th>"<<escape(student.name)<<"</th>";
                     foreach (const QDate &date, m_dates)
                     {
                         out<<"<td>";
-                        out<<escape(student.data[m_subjectId][date]).toUtf8();
+                        out<<escape(student.data[m_subjectId][date]);
                         out<<"</td>";
                     }
                     out<<"</tr>\n";
