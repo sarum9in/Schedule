@@ -41,7 +41,8 @@ void SubjectListEdit::removeSubject()
     if (!selected.isEmpty())
     {
         Q_ASSERT(selected.size()==1);
-        m_subjectsModel->removeRow(selected.first().row());
+        m_group->removeSubject(selected.first().row());
+        m_subjectsModel->setStringList(m_group->subjectNames());
     }
 }
 
@@ -58,6 +59,7 @@ void SubjectListEdit::removeStudent()
     {
         Q_ASSERT(selected.size()==1);
         m_group->removeMember(selected.first().row());
+        m_studentsModel->setStringList(m_group->memberNames());
     }
 }
 
