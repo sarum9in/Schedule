@@ -19,7 +19,7 @@ public:
 
 private slots:
     void cellChanged(int row, int column);
-    void printTable();
+    void saveTable();
 
 private:
     Ui::SubjectSchedule *ui;

@@ -2,9 +2,10 @@
 #include "ui_SubjectSchedule.h"
 
 #include <QLabel>
-#include <QPrintDialog>
-#include <QPrinter>
-#include <QPainter>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QFile>
+#include <QTextStream>
 
 SubjectSchedule::SubjectSchedule(QWidget *parent) :
     QWidget(parent),
@@ -49,24 +50,18 @@ void SubjectSchedule::cellChanged(int row, int column)
     m_group->member(studentId).data[m_subjectId][m_dates[dateId]] = value;
 }
 
-void SubjectSchedule::printTable()
+void SubjectSchedule::saveTable()
 {
-    QPrintDialog *dialog = new QPrintDialog(this);
-    if (dialog->exec()==QDialog::Accepted)
+    const QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Сохранить таблицу"), QString(), tr("HTML (*.html)"));
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly))
     {
-        QWidget *widget = ui->scheduleTable;
-        QPrinter *printer = dialog->printer();
-        QPainter painter(printer);
-        double xscale = printer->pageRect().width()/double(widget->width());
-        double yscale = printer->pageRect().height()/double(widget->height());
-        double scale = qMin(xscale, yscale);
-        painter.translate(printer->paperRect().x() + printer->pageRect().width()/2,
-                           printer->paperRect().y() + printer->pageRect().height()/2);
-        painter.scale(scale, scale);
-        painter.translate(-width()/2, -height()/2);
-        widget->render(&painter);
+        QMessageBox::warning(this, trUtf8("Ошибка"), trUtf8("Не получается открыть файл на запись!"));
     }
-    dialog->deleteLater();
+    else
+    {
+        QTextStream out(&file);
+    }
 }
 
 SubjectSchedule::~SubjectSchedule()
