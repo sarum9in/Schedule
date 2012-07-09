@@ -81,21 +81,21 @@ void SubjectSchedule::saveTable()
                 out<<"<table border=\"1\">\n";
                 {
                     out<<"<tr>";
-                    out<<"<th>"+escape(trUtf8("Студент"))+"</th>";
+                    out<<"<th>"+escape(trUtf8("Студент")).toUtf8()+"</th>";
                     foreach (const QDate &date, m_dates)
                     {
-                        out<<"<th>"<<escape(date.toString("dd.MM"))<<"</th>";
+                        out<<"<th>"<<escape(date.toString("dd.MM")).toUtf8()<<"</th>";
                     }
                     out<<"</tr>\n";
                 }
                 foreach (const Student &student, m_group->members())
                 {
                     out<<"<tr>";
-                    out<<"<th>"<<escape(student.name)<<"</th>";
+                    out<<"<th>"<<escape(student.name).toUtf8()<<"</th>";
                     foreach (const QDate &date, m_dates)
                     {
                         out<<"<td>";
-                        out<<escape(student.data[m_subjectId][date]);
+                        out<<escape(student.data[m_subjectId][date]).toUtf8();
                         out<<"</td>";
                     }
                     out<<"</tr>\n";
