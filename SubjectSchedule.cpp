@@ -50,6 +50,14 @@ void SubjectSchedule::cellChanged(int row, int column)
     m_group->member(studentId).data[m_subjectId][m_dates[dateId]] = value;
 }
 
+namespace
+{
+    QString escape(const QString &str)
+    {
+        return QString(str).replace("&","&amp;").replace(">","&gt;").replace("<","&lt;");
+    }
+}
+
 void SubjectSchedule::saveTable()
 {
     const QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Сохранить таблицу"), QString(), tr("HTML (*.html)"));
@@ -61,6 +69,42 @@ void SubjectSchedule::saveTable()
     else
     {
         QTextStream out(&file);
+        out<<"<html>\n";
+        {
+            out<<"<head>\n";
+            out<<"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
+            out<<"</head>\n";
+        }
+        {
+            out<<"<body>\n";
+            {
+                out<<"<table border=\"1\">\n";
+                {
+                    out<<"<tr>";
+                    out<<"<th>"+escape(trUtf8("Студент"))+"</th>";
+                    foreach (const QDate &date, m_dates)
+                    {
+                        out<<"<th>"<<escape(date.toString("dd.MM"))<<"</th>";
+                    }
+                    out<<"</tr>\n";
+                }
+                foreach (const Student &student, m_group->members())
+                {
+                    out<<"<tr>";
+                    out<<"<th>"<<escape(student.name)<<"</th>";
+                    foreach (const QDate &date, m_dates)
+                    {
+                        out<<"<td>";
+                        out<<escape(student.data[m_subjectId][date]);
+                        out<<"</td>";
+                    }
+                    out<<"</tr>\n";
+                }
+                out<<"</table>\n";
+            }
+            out<<"</body>\n";
+        }
+        out<<"</html>\n";
     }
 }
 
