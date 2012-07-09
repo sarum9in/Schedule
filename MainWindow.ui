@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>437</width>
-    <height>279</height>
+    <width>515</width>
+    <height>313</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,14 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="3">
+        <item row="0" column="3">
+         <widget class="QPushButton" name="clearButton">
+          <property name="text">
+           <string>Удалить всё</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="4">
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="1" column="0">
            <widget class="QListView" name="course1List"/>
@@ -115,7 +122,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>437</width>
+     <width>515</width>
      <height>21</height>
     </rect>
    </property>
@@ -165,9 +172,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>clearDB()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>439</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>257</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAddGroupDialog()</slot>
   <slot>removeGroups()</slot>
+  <slot>clearDB()</slot>
  </slots>
 </ui>

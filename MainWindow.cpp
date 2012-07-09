@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QDesktopServices>
+#include <QMessageBox>
 
 #include "EditGroup.hpp"
 
@@ -129,4 +130,17 @@ void MainWindow::save()
     QDataStream output(&db);
     output<<magic;
     output<<m_groupByName;
+}
+
+void MainWindow::clearDB()
+{
+    int ret = QMessageBox::question(
+                  this, trUtf8("Очистка"),
+                  trUtf8("Вы уверены, что хотите очистить базу данных? Данные будут утеряны безвозвратно!"),
+                  QMessageBox::Ok, QMessageBox::Cancel);
+    if (ret==QMessageBox::Ok)
+    {
+        m_groupByName.clear();
+        repack();
+    }
 }

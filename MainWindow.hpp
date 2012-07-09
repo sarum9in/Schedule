@@ -30,6 +30,7 @@ private slots:
     void showAddGroupDialog();
     void showCourses();
     void removeGroups();
+    void clearDB();
 
 private:
     void load();
