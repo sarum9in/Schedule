@@ -49,6 +49,7 @@ void EditGroup::removeStudent()
     {
         Q_ASSERT(selected.size()==1);
         m_group.removeMember(selected.first().row());
+        m_studentsModel->setStringList(m_group.memberNames());
     }
 }
 
