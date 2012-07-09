@@ -4,6 +4,7 @@
 #include <QModelIndex>
 #include <QStringListModel>
 #include <QString>
+#include <QListView>
 
 #include "Group.hpp"
 
@@ -28,6 +29,7 @@ private slots:
     void repack();
     void showAddGroupDialog();
     void showCourses();
+    void removeGroups();
 
 private:
     void load();
@@ -39,4 +41,5 @@ private:
     Ui::MainWindow *ui;
     GroupByNameMap m_groupByName;
     QStringListModel *m_course[5];
+    QListView *m_courseView[5];
 };

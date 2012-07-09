@@ -14,16 +14,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     for (int i = 0; i<5; ++i)
         m_course[i] = new QStringListModel(this);
-    ui->course1List->setModel(m_course[0]);
-    ui->course2List->setModel(m_course[1]);
-    ui->course3List->setModel(m_course[2]);
-    ui->course4List->setModel(m_course[3]);
-    ui->course5List->setModel(m_course[4]);
-    connect(ui->course1List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
-    connect(ui->course2List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
-    connect(ui->course3List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
-    connect(ui->course4List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
-    connect(ui->course5List, SIGNAL(clicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
+    m_courseView[0] = ui->course1List;
+    m_courseView[1] = ui->course2List;
+    m_courseView[2] = ui->course3List;
+    m_courseView[3] = ui->course4List;
+    m_courseView[4] = ui->course5List;
+    for (int i = 0; i<5; ++i)
+    {
+        m_courseView[i]->setModel(m_course[i]);
+        connect(m_courseView[i], SIGNAL(doubleClicked(QModelIndex)), this, SLOT(groupClicked(QModelIndex)));
+    }
     connect(ui->subjectListEdit, SIGNAL(back()), this, SLOT(showCourses()));
     load();
 }
@@ -58,6 +58,19 @@ void MainWindow::showAddGroupDialog()
      editGroup->exec();
      editGroup->deleteLater();
      repack();
+}
+
+void MainWindow::removeGroups()
+{
+    for (int i = 0; i<5; ++i)
+    {
+        QModelIndexList selected = m_courseView[i]->selectionModel()->selectedIndexes();
+        foreach (const QModelIndex &index, selected)
+        {
+            m_groupByName.remove(index.data().toString());
+        }
+    }
+    repack();
 }
 
 void MainWindow::showCourses()

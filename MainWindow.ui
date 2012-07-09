@@ -36,7 +36,14 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="2">
+        <item row="0" column="2">
+         <widget class="QPushButton" name="removeGroupsButton">
+          <property name="text">
+           <string>Удалить группы</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="1" column="0">
            <widget class="QListView" name="course1List"/>
@@ -142,8 +149,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>removeGroupsButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>removeGroups()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>353</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAddGroupDialog()</slot>
+  <slot>removeGroups()</slot>
  </slots>
 </ui>
